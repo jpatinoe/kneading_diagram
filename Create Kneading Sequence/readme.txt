@@ -1,0 +1,1 @@
+The file kneading_invariant_longdata.mat has more data that was collected previously. I added it here to have a better resolution of the image. A similar structure can be obtained by choosing delta_x = 0.08 and delta_y = 0.016

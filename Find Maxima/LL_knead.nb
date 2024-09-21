@@ -1,0 +1,319 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     12112,        311]
+NotebookOptionsPosition[     10025,        265]
+NotebookOutlinePosition[     10460,        282]
+CellTagsIndexPosition[     10417,        279]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Loading MathTIDES", "Section",
+ CellChangeTimes->{{3.504611527097014*^9, 
+  3.504611535701703*^9}},ExpressionUUID->"bd145520-12a1-445c-88c9-\
+920f5d416657"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "MathTIDES`"}]], "Input",
+ CellChangeTimes->{{3.504611544095785*^9, 3.504611548061817*^9}},
+ CellLabel->"In[11]:=",ExpressionUUID->"7378ba9e-a59e-4f3f-a41e-887d130d39ca"],
+
+Cell[BoxData[
+ TagBox[
+  FrameBox[
+   RowBox[{
+    StyleBox[
+     RowBox[{"    ", 
+      RowBox[{
+       RowBox[{"MathTIDES", " ", "2.00"}], "\n", "    ", 
+       RowBox[{
+        RowBox[{
+        "MathTIDES", "    ", "is", "   ", "part", "   ", "of", "   ", "the", "   ",
+          "TIDES", "   ", 
+         RowBox[{"project", ".", "\n", "    ", "Copyright"}], 
+         RowBox[{"(", "C", ")"}], "  ", "2010", "  ", "Abad"}], ",", " ", 
+        RowBox[{"A", "."}], ",", "  ", "Barrio", ",", " ", 
+        RowBox[{"R", "."}], ",", "  ", "Blesa", ",", " ", 
+        RowBox[{
+         RowBox[{"F", ".", "  ", "and"}], "  ", "Rodriguez"}], ",", " ", 
+        RowBox[{"M", ".", "\n"}]}]}]}],
+     FontFamily->"Geneva"], 
+    TemplateBox[{
+     "\"http://gme.unizar.es/software/tides\"", 
+      "http://gme.unizar.es/software/tides"},
+     "HyperlinkURL"]}],
+   Background->RGBColor[1, 1, 0.85]],
+  DisplayForm]], "Output",
+ CellChangeTimes->{
+  3.504611624578113*^9, 3.504612596138023*^9, 3.5046163489964447`*^9, 
+   3.8888793023782187`*^9, 3.888883172808598*^9, 3.88913936318537*^9, 
+   3.889139621471506*^9, 3.8892258650762*^9, {3.889228596114462*^9, 
+   3.889228604303673*^9}, 3.889466471294386*^9, 3.890347266961025*^9, 
+   3.890427738797187*^9, 3.9342205976883507`*^9},
+ CellLabel->
+  "Out[11]//DisplayForm=",ExpressionUUID->"cdf7e8a0-d1e4-4999-9f4b-\
+3df7cd6e2814"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Setting the work directory", "Section",
+ CellChangeTimes->{{3.5046115899786386`*^9, 
+  3.504611612743342*^9}},ExpressionUUID->"6e471d8d-fd36-43e7-a664-\
+dea1719e655a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.504611504172099*^9, 3.5046115237780867`*^9}},
+ CellLabel->"In[12]:=",ExpressionUUID->"f27b7996-a75e-4138-bfb5-00cbf0aef36b"],
+
+Cell[BoxData["\<\"/Users/jpat943/Documents/2024/TIDES/Kneading Diagram/Find \
+Maxima\"\>"], "Output",
+ CellChangeTimes->{3.5046116262400103`*^9, 3.504612596230681*^9, 
+  3.504616350807206*^9, 3.888879308461432*^9, 3.888883174390943*^9, 
+  3.889139367572682*^9, 3.889139628400374*^9, 3.889226064370914*^9, 
+  3.8892286064271593`*^9, 3.889466474459393*^9, 3.890347271607841*^9, 
+  3.890427742075713*^9, 3.934220602312833*^9},
+ CellLabel->"Out[12]=",ExpressionUUID->"d8d8c994-d01e-4a85-8054-573967fb63c2"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Writing code to compute events", "Section",
+ CellChangeTimes->{{3.504616862650247*^9, 
+  3.504616878744357*^9}},ExpressionUUID->"0e3ca5f7-d6ec-4463-a3b0-\
+bd849dfe77c5"],
+
+Cell[CellGroupData[{
+
+Cell["Declaring the Lorenz Like differential equation", "Subsection",
+ CellChangeTimes->{{3.504611649805194*^9, 3.504611659312459*^9}, {
+  3.504612548740176*^9, 3.504612549593028*^9}, {3.504616317526087*^9, 
+  3.504616320164647*^9}, {3.504616791343506*^9, 3.5046167925256557`*^9}, {
+  3.888879337860882*^9, 
+  3.888879339956216*^9}},ExpressionUUID->"4aefc601-c28c-4e4b-8922-\
+ea709dd86f53"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"LorenzlikeODE", "=", 
+   RowBox[{"FirstOrderODE", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"10", "*", "y"}], "-", 
+        RowBox[{"10", "*", "x"}]}], ",", 
+       RowBox[{
+        RowBox[{"r", "*", "x"}], "-", 
+        RowBox[{"x", "*", "z"}], "-", "y"}], ",", 
+       RowBox[{
+        RowBox[{"x", "*", "y"}], "-", 
+        RowBox[{
+         FractionBox["8", "3"], "*", "z"}], "+", 
+        RowBox[{"m", "*", "w"}]}], ",", 
+       RowBox[{
+        RowBox[{
+         FractionBox[
+          RowBox[{"-", "8"}], "3"], "*", "w"}], "-", 
+        RowBox[{"m", "*", "z"}]}]}], "}"}], ",", "t", ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y", ",", "z", ",", "w"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"r", ",", "m"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.888879342780937*^9, 3.888879376723477*^9}, {
+  3.888879413298285*^9, 3.8888794589918833`*^9}, {3.888879894127625*^9, 
+  3.888879902198674*^9}, {3.888880145961586*^9, 3.888880146856741*^9}, {
+  3.888880206360613*^9, 3.8888802265511417`*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"42a5730e-c21b-4bc4-9c80-4617e145a92d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Event of the function", "Subsection",
+ CellChangeTimes->{{3.504616897410726*^9, 3.504616920577626*^9}, {
+  3.888879968275921*^9, 
+  3.888879972691202*^9}},ExpressionUUID->"c486df38-04c9-44b6-b68e-\
+13f082434024"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TSMCodeFiles", "[", 
+  RowBox[{
+  "LorenzlikeODE", ",", " ", "\"\<LL_knead\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"InitialConditions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"0.01", 
+       RowBox[{"(", 
+        RowBox[{
+         FractionBox["1", 
+          RowBox[{"2", "*", "23.5"}]], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "9"}], "+", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{"81", "+", 
+             RowBox[{"40", "*", "23.5"}]}], "]"}]}], ")"}]}], ")"}]}], ",", 
+      RowBox[{"0.01", "*", "1"}], ",", "0", ",", "0"}], "}"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ParametersValue", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"23.5", ",", "0"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"IntegrationPoints", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "100"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"FindMaxima", "\[Rule]", "x"}], ",", 
+   RowBox[{"EventsNumber", "\[Rule]", "20"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Output", "\[Rule]", "\"\<LL_knead_max.dat\>\""}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.888879468336197*^9, 3.8888794871668863`*^9}, {
+   3.888879906142507*^9, 3.888879919245566*^9}, {3.8888802298559227`*^9, 
+   3.888880230094919*^9}, {3.888880292799059*^9, 3.888880294358243*^9}, {
+   3.888880408228817*^9, 3.888880422507556*^9}, {3.888882778494308*^9, 
+   3.888882778676816*^9}, {3.888882959206581*^9, 3.888882990671647*^9}, {
+   3.8888831062981167`*^9, 3.888883134329151*^9}, {3.888883224847464*^9, 
+   3.888883227829253*^9}, 3.8888835840785303`*^9, {3.8888836537156057`*^9, 
+   3.88888366460226*^9}, {3.889139503062385*^9, 3.889139525148407*^9}, {
+   3.889139572981001*^9, 3.889139617494842*^9}, {3.889139683196327*^9, 
+   3.889139683595866*^9}, {3.889139799069591*^9, 3.88913980148447*^9}, {
+   3.889226071657975*^9, 3.889226094407569*^9}, {3.889228550388051*^9, 
+   3.8892285739462757`*^9}, {3.8892286247703323`*^9, 3.889228643432617*^9}, 
+   3.889229050661635*^9, 3.889229446547687*^9, {3.8903472831372232`*^9, 
+   3.890347284462758*^9}, {3.890427756235559*^9, 3.8904277563866463`*^9}, {
+   3.934220619682539*^9, 3.934220648353571*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"291122a5-f8cb-41e4-8312-c5cb63010652"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "DeleteFile", "fdnfnd", 
+   "\"Directory or file \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"dr_LL_knead.c\\\\\\\"\\\"}]\\) not found.\"", 2, 
+   16, 9, 26201864505320564807, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.934220710628962*^9},
+ CellLabel->
+  "During evaluation of \
+In[16]:=",ExpressionUUID->"643b8455-3406-4004-85db-f5b26fabf375"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "DeleteFile", "fdnfnd", 
+   "\"Directory or file \\!\\(\\*RowBox[{\\\"\\\\\\\"LL_knead.c\\\\\\\"\\\"}]\
+\\) not found.\"", 2, 16, 10, 26201864505320564807, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.934220710633687*^9},
+ CellLabel->
+  "During evaluation of \
+In[16]:=",ExpressionUUID->"e4ca5dbc-7142-45b4-94e2-531140b73714"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "DeleteFile", "fdnfnd", 
+   "\"Directory or file \\!\\(\\*RowBox[{\\\"\\\\\\\"LL_knead.h\\\\\\\"\\\"}]\
+\\) not found.\"", 2, 16, 11, 26201864505320564807, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.934220710637246*^9},
+ CellLabel->
+  "During evaluation of \
+In[16]:=",ExpressionUUID->"ee2608fe-e6d8-4dec-b175-42700113d2a8"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"DeleteFile\\\", \
+\\\"::\\\", \\\"fdnfnd\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 16, 12, 26201864505320564807, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.9342207106411257`*^9},
+ CellLabel->
+  "During evaluation of \
+In[16]:=",ExpressionUUID->"50c05775-b234-4980-b5b9-918f6b65540b"],
+
+Cell[BoxData["\<\"Files \\\"dr_LL_knead.c\\\", \\\"LL_knead.h\\\", LL_knead.c\
+\\\", written on directory \\\"/Users/jpat943/Documents/2024/TIDES/Kneading \
+Diagram/Find Maxima\\\".\"\>"], "Output",
+ CellChangeTimes->{{3.889139804689293*^9, 3.889139816972801*^9}, 
+   3.8892260991775923`*^9, {3.889228583723976*^9, 3.889228612150223*^9}, 
+   3.889228645946761*^9, 3.889229053021879*^9, 3.889229452313096*^9, 
+   3.889466484916521*^9, {3.8903472948221817`*^9, 3.890347326293827*^9}, 
+   3.890427759271995*^9, 3.9342206506263323`*^9, 3.934220710646124*^9},
+ CellLabel->"Out[16]=",ExpressionUUID->"9cbb0f8b-94ac-497f-9ba7-c5a4031809a3"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1003, 856},
+WindowMargins->{{Automatic, 350}, {Automatic, 98}},
+TaggingRules->{"TryRealOnly" -> False},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"72629aba-56e4-4373-b257-b7f108fc62ce"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 162, 3, 67, "Section",ExpressionUUID->"bd145520-12a1-445c-88c9-920f5d416657"],
+Cell[CellGroupData[{
+Cell[754, 29, 199, 3, 30, "Input",ExpressionUUID->"7378ba9e-a59e-4f3f-a41e-887d130d39ca"],
+Cell[956, 34, 1367, 34, 120, "Output",ExpressionUUID->"cdf7e8a0-d1e4-4999-9f4b-3df7cd6e2814"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2372, 74, 173, 3, 67, "Section",ExpressionUUID->"6e471d8d-fd36-43e7-a664-dea1719e655a"],
+Cell[CellGroupData[{
+Cell[2570, 81, 251, 4, 30, "Input",ExpressionUUID->"f27b7996-a75e-4138-bfb5-00cbf0aef36b"],
+Cell[2824, 87, 502, 7, 34, "Output",ExpressionUUID->"d8d8c994-d01e-4a85-8054-573967fb63c2"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3375, 100, 175, 3, 67, "Section",ExpressionUUID->"0e3ca5f7-d6ec-4463-a3b0-bd849dfe77c5"],
+Cell[CellGroupData[{
+Cell[3575, 107, 390, 6, 54, "Subsection",ExpressionUUID->"4aefc601-c28c-4e4b-8922-ea709dd86f53"],
+Cell[3968, 115, 1183, 31, 48, "Input",ExpressionUUID->"42a5730e-c21b-4bc4-9c80-4617e145a92d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5188, 151, 218, 4, 54, "Subsection",ExpressionUUID->"c486df38-04c9-44b6-b68e-13f082434024"],
+Cell[CellGroupData[{
+Cell[5431, 159, 2289, 45, 169, "Input",ExpressionUUID->"291122a5-f8cb-41e4-8312-c5cb63010652"],
+Cell[7723, 206, 390, 10, 24, "Message",ExpressionUUID->"643b8455-3406-4004-85db-f5b26fabf375"],
+Cell[8116, 218, 384, 9, 24, "Message",ExpressionUUID->"e4ca5dbc-7142-45b4-94e2-531140b73714"],
+Cell[8503, 229, 384, 9, 24, "Message",ExpressionUUID->"ee2608fe-e6d8-4dec-b175-42700113d2a8"],
+Cell[8890, 240, 459, 10, 24, "Message",ExpressionUUID->"50c05775-b234-4980-b5b9-918f6b65540b"],
+Cell[9352, 252, 633, 8, 79, "Output",ExpressionUUID->"9cbb0f8b-94ac-497f-9ba7-c5a4031809a3"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
